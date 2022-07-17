@@ -1,6 +1,9 @@
 package com.example.recipeapp
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
@@ -14,6 +17,10 @@ class AddRecipeActivity : AppCompatActivity() {
         RecipeViewModel.RecipeViewModelFactory((application as MyApplication).repository)
     }
 
+    private var imageUri: Uri? = null
+    private val pickImage = 100
+    lateinit var imageView: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_recipe)
@@ -22,10 +29,19 @@ class AddRecipeActivity : AppCompatActivity() {
         val recipeType = findViewById<Spinner>(R.id.recipeType)
         val recipeIngredients = findViewById<EditText>(R.id.recipeIngredients)
         val recipeSteps = findViewById<EditText>(R.id.recipeSteps)
-        val recipeImage = findViewById<EditText>(R.id.recipeImage)
+        val recipeImage = findViewById<Button>(R.id.btnAddImage)
         val btnAdd = findViewById<Button>(R.id.btnAdd)
+        imageView= findViewById(R.id.imageView)
 
         addRecipe(recipeName, recipeType, recipeIngredients, recipeSteps, recipeImage, btnAdd)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK && requestCode == pickImage) {
+            imageUri = data?.data
+            imageView.setImageURI(imageUri)
+        }
     }
 
     private fun addRecipe(
@@ -33,9 +49,14 @@ class AddRecipeActivity : AppCompatActivity() {
         recipeType: Spinner,
         recipeIngredients: EditText,
         recipeSteps: EditText,
-        recipeImage: EditText,
+        recipeImage: Button,
         btnAdd: Button
     ) {
+
+        recipeImage.setOnClickListener {
+            val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+            startActivityForResult(gallery, pickImage)
+        }
 
         val types = resources.getStringArray(R.array.Types)
         val adapter = ArrayAdapter(this,
@@ -57,14 +78,13 @@ class AddRecipeActivity : AppCompatActivity() {
                         recipeName.text.toString(),
                         recipeIngredients.text.toString(),
                         recipeSteps.text.toString(),
-                        recipeImage.text.toString())
+                        imageUri.toString())
 
                     recipeViewModel.insert(recipe)
 
                     recipeName.setText("")
                     recipeIngredients.setText("")
                     recipeSteps.setText("")
-                    recipeImage.setText("")
                 }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {

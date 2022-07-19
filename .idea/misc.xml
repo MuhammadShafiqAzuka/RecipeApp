@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../Library/Android/sdk/platforms/android-32/data/res/layout/simple_spinner_item.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/activity_add_recipe.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_add_recipe.xml" value="0.19059661865234373" />
         <entry key="app/src/main/res/layout/activity_edit.xml" value="0.2020389249304912" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.24283882000855067" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.21501390176088972" />
         <entry key="app/src/main/res/layout/recipe_list.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/recipetypes.xml" value="0.30885416666666665" />
         <entry key="app/src/main/res/menu/recipestype.xml" value="0.3098958333333333" />

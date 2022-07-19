@@ -1,11 +1,10 @@
-package com.example.recipeapp.Recipe.ViewModel
+package com.example.recipeapp.Component.ViewModel
 
 import androidx.lifecycle.*
-import com.example.recipeapp.Recipe.Model.Recipe
-import com.example.recipeapp.Recipe.Repository.RecipeRepository
+import com.example.recipeapp.Component.Model.Recipe
+import com.example.recipeapp.Component.Repository.RecipeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class RecipeViewModel(private val recipeRepository: RecipeRepository) : ViewModel() {
 

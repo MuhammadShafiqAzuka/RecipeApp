@@ -1,4 +1,4 @@
-package com.example.recipeapp.Recipe.Network
+package com.example.recipeapp.Component.Network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -1,19 +1,17 @@
-package com.example.recipeapp
+package com.example.recipeapp.UI.Recipe
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.recipeapp.Recipe.Model.Recipe
+import com.example.recipeapp.Component.Model.Recipe
+import com.example.recipeapp.R
 import com.squareup.picasso.Picasso
 
 
@@ -47,11 +45,11 @@ class RecipeListAdapter : ListAdapter<Recipe, RecipeListAdapter.RecipeViewHolder
         private val image: ImageView = itemView.findViewById(R.id.recipeListImage)
 
         fun bind(recipe: Recipe) {
-            name.text = recipe.name
             type.text = recipe.type
+            name.text = recipe.name
             ingredients.text = recipe.ingredients
             steps.text = recipe.steps
-            Picasso.get().load(recipe.image).into(image);
+            Picasso.get().load(recipe.image).into(image)
         }
 
         companion object {

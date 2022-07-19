@@ -1,12 +1,14 @@
-package com.example.recipeapp.Recipe.Model
+package com.example.recipeapp.Component.Model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity
 data class Recipe(
+
     //Model data are attributes of the data
     @ColumnInfo(name = "recipeType") @field : SerializedName("creditsText") val type: String,
     @ColumnInfo(name = "recipeName") @field : SerializedName("title") val name: String,

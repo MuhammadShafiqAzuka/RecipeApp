@@ -1,4 +1,4 @@
-package com.example.recipeapp
+package com.example.recipeapp.UI.Recipe
 
 import android.content.Intent
 import android.net.Uri
@@ -8,14 +8,17 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
-import com.example.recipeapp.Recipe.Model.Recipe
-import com.example.recipeapp.Recipe.ViewModel.RecipeViewModel
+import com.example.recipeapp.Component.Model.Recipe
+import com.example.recipeapp.Component.ViewModel.RecipeViewModel
+import com.example.recipeapp.MainActivity
+import com.example.recipeapp.MyApplication
+import com.example.recipeapp.R
 import com.squareup.picasso.Picasso
 
 class EditRecipeActivity : AppCompatActivity() {
 
     private val recipeViewModel : RecipeViewModel by viewModels {
-        RecipeViewModel.RecipeViewModelFactory((application as MyApplication).repository)
+        RecipeViewModel.RecipeViewModelFactory((application as MyApplication).recipeRepository)
     }
 
     private var imageUri: Uri? = null
@@ -30,12 +33,11 @@ class EditRecipeActivity : AppCompatActivity() {
         val recipeType = findViewById<Spinner>(R.id.editrecipeType)
         val recipeIngredients = findViewById<EditText>(R.id.editrecipeIngredients)
         val recipeSteps = findViewById<EditText>(R.id.editrecipeSteps)
-        val recipeImage = findViewById<Button>(R.id.btnAddImageEdit)
         val btnEdit = findViewById<Button>(R.id.btnEdit)
         val btnDelete = findViewById<Button>(R.id.btnDelete)
         imageView= findViewById(R.id.imageViewEdit)
 
-        editRecipe(recipeName, recipeType, recipeIngredients, recipeSteps, recipeImage, btnEdit, btnDelete)
+        editRecipe(recipeName, recipeType, recipeIngredients, recipeSteps, btnEdit, btnDelete)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -51,12 +53,11 @@ class EditRecipeActivity : AppCompatActivity() {
         recipeType: Spinner,
         recipeIngredients: EditText,
         recipeSteps: EditText,
-        recipeImage: Button,
         btnEdit: Button,
         btnDelete: Button
     ) {
 
-        recipeImage.setOnClickListener {
+        imageView.setOnClickListener {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, pickImage)
         }
@@ -93,7 +94,7 @@ class EditRecipeActivity : AppCompatActivity() {
                             recipeName.text.toString(),
                             recipeIngredients.text.toString(),
                             recipeSteps.text.toString(),
-                            recipeImage.text.toString())
+                            imageUri.toString())
 
                         recipeViewModel.update(recipe)
                     }
@@ -114,7 +115,6 @@ class EditRecipeActivity : AppCompatActivity() {
             recipeName.text = null
             recipeIngredients.text = null
             recipeSteps.text = null
-            recipeImage.text = null
         }
     }
 }

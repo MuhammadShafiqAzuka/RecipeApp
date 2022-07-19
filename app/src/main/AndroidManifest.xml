@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.recipeapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MyApplication"
@@ -17,19 +18,25 @@
         android:theme="@style/Theme.RecipeApp"
         tools:targetApi="31">
         <activity
-            android:name=".EditRecipeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AddRecipeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".UI.User.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".UI.User.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Recipe.EditRecipeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Recipe.AddRecipeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false">
         </activity>
     </application>
 

@@ -1,16 +1,15 @@
-package com.example.recipeapp.Recipe.DAO
+package com.example.recipeapp.Component.DAO
 
 import androidx.room.*
-import com.example.recipeapp.Recipe.Model.Recipe
+import com.example.recipeapp.Component.Model.Recipe
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
 
 @Dao
 interface RecipeDAO {
 
     //Data Access Object is the method to get data
 
-    @Query("SELECT * FROM Recipe ORDER BY recipeType")
+    @Query("SELECT * FROM Recipe")
     fun getAll(): Flow<MutableList<Recipe>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -19,7 +18,7 @@ interface RecipeDAO {
     @Update
     fun update(recipe: Recipe)
 
-    @Query("DELETE FROM Recipe WHERE recipeName = :name")
+    @Query("DELETE FROM Recipe WHERE recipeName = (:name)")
     fun delete(name: String)
 
     @Query("SELECT * FROM Recipe WHERE recipeType IN (:types)")

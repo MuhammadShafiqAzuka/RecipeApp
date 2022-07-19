@@ -1,4 +1,4 @@
-package com.example.recipeapp
+package com.example.recipeapp.UI.Recipe
 
 import android.content.Intent
 import android.net.Uri
@@ -8,13 +8,15 @@ import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.recipeapp.Recipe.Model.Recipe
-import com.example.recipeapp.Recipe.ViewModel.RecipeViewModel
+import com.example.recipeapp.Component.Model.Recipe
+import com.example.recipeapp.Component.ViewModel.RecipeViewModel
+import com.example.recipeapp.MyApplication
+import com.example.recipeapp.R
 
 class AddRecipeActivity : AppCompatActivity() {
 
     private val recipeViewModel : RecipeViewModel by viewModels {
-        RecipeViewModel.RecipeViewModelFactory((application as MyApplication).repository)
+        RecipeViewModel.RecipeViewModelFactory((application as MyApplication).recipeRepository)
     }
 
     private var imageUri: Uri? = null
@@ -29,11 +31,10 @@ class AddRecipeActivity : AppCompatActivity() {
         val recipeType = findViewById<Spinner>(R.id.recipeType)
         val recipeIngredients = findViewById<EditText>(R.id.recipeIngredients)
         val recipeSteps = findViewById<EditText>(R.id.recipeSteps)
-        val recipeImage = findViewById<Button>(R.id.btnAddImage)
         val btnAdd = findViewById<Button>(R.id.btnAdd)
         imageView= findViewById(R.id.imageView)
 
-        addRecipe(recipeName, recipeType, recipeIngredients, recipeSteps, recipeImage, btnAdd)
+        addRecipe(recipeName, recipeType, recipeIngredients, recipeSteps, btnAdd)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -49,11 +50,10 @@ class AddRecipeActivity : AppCompatActivity() {
         recipeType: Spinner,
         recipeIngredients: EditText,
         recipeSteps: EditText,
-        recipeImage: Button,
         btnAdd: Button
     ) {
 
-        recipeImage.setOnClickListener {
+        imageView.setOnClickListener {
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
             startActivityForResult(gallery, pickImage)
         }

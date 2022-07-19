@@ -1,10 +1,9 @@
-package com.example.recipeapp.Recipe.Repository
+package com.example.recipeapp.Component.Repository
 
 import androidx.annotation.WorkerThread
-import com.example.recipeapp.Recipe.DAO.RecipeDAO
-import com.example.recipeapp.Recipe.Model.Recipe
+import com.example.recipeapp.Component.DAO.RecipeDAO
+import com.example.recipeapp.Component.Model.Recipe
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
 
 
 class RecipeRepository (private val recipeDAO: RecipeDAO) {

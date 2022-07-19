@@ -1,6 +1,6 @@
-package com.example.recipeapp.Recipe.Network
+package com.example.recipeapp.Component.Network
 
-import com.example.recipeapp.Recipe.Model.Recipe
+import com.example.recipeapp.Component.Model.Recipe
 import retrofit2.http.GET
 
 interface RecipeAPI {
